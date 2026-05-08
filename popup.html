@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vaultify</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash-screen" class="screen">
+    <div class="splash-content">
+      <h1>🔐 Vaultify</h1>
+      <p>Your Secure Vault</p>
+    </div>
+  </div>
+
+  <!-- Create Password Screen -->
+  <div id="create-password-screen" class="screen hidden">
+    <div class="container">
+      <h2>Create Master Password</h2>
+      <input type="password" id="new-password" placeholder="Enter master password" />
+      <input type="password" id="confirm-password" placeholder="Confirm password" />
+      <button id="create-btn">Create Vault</button>
+      <p class="error" id="create-error"></p>
+    </div>
+  </div>
+
+  <!-- Login Screen -->
+  <div id="login-screen" class="screen hidden">
+    <div class="container">
+      <h2>🔐 Unlock Vault</h2>
+      <input type="password" id="login-password" placeholder="Enter master password" />
+      <button id="login-btn">Unlock</button>
+      <p class="error" id="login-error"></p>
+    </div>
+  </div>
+
+  <!-- Calculator Mode -->
+  <div id="calculator-screen" class="screen hidden">
+    <div class="calculator">
+      <input type="text" id="calc-display" readonly />
+      <div class="calc-buttons">
+        <button class="calc-btn">7</button>
+        <button class="calc-btn">8</button>
+        <button class="calc-btn">9</button>
+        <button class="calc-btn operator">/</button>
+        <button class="calc-btn">4</button>
+        <button class="calc-btn">5</button>
+        <button class="calc-btn">6</button>
+        <button class="calc-btn operator">*</button>
+        <button class="calc-btn">1</button>
+        <button class="calc-btn">2</button>
+        <button class="calc-btn">3</button>
+        <button class="calc-btn operator">-</button>
+        <button class="calc-btn">0</button>
+        <button class="calc-btn">.</button>
+        <button class="calc-btn operator">=</button>
+        <button class="calc-btn operator">+</button>
+        <button class="calc-btn clear">C</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard-screen" class="screen hidden">
+    <div class="header">
+      <h2>Vaultify</h2>
+      <button id="settings-btn">⚙️</button>
+    </div>
+    
+    <div class="tabs">
+      <button class="tab active" data-tab="notes">📝 Notes</button>
+      <button class="tab" data-tab="links">🔗 Links</button>
+      <button class="tab" data-tab="images">🖼️ Images</button>
+      <button class="tab" data-tab="pdfs">📄 PDFs</button>
+    </div>
+
+    <div id="notes-tab" class="tab-content">
+      <button class="add-btn" id="add-note-btn">+ Add Note</button>
+      <div id="notes-list"></div>
+    </div>
+
+    <div id="links-tab" class="tab-content hidden">
+      <button class="add-btn" id="add-link-btn">+ Add Link</button>
+      <div id="links-list"></div>
+    </div>
+
+    <div id="images-tab" class="tab-content hidden">
+      <button class="add-btn" id="add-image-btn">+ Add Image</button>
+      <div id="images-list"></div>
+    </div>
+
+    <div id="pdfs-tab" class="tab-content hidden">
+      <button class="add-btn" id="add-pdf-btn">+ Add PDF</button>
+      <div id="pdfs-list"></div>
+    </div>
+
+    <!-- Storage Info -->
+    <div class="storage-info">
+      <div id="storage-bar-container">
+        <div id="storage-bar"></div>
+      </div>
+      <p id="storage-text">Loading...</p>
+    </div>
+  </div>
+
+  <!-- Add Note Modal -->
+  <div id="note-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Add Note</h3>
+      <input type="text" id="note-title" placeholder="Title" />
+      <textarea id="note-content" placeholder="Content"></textarea>
+      <div class="modal-actions">
+        <button id="save-note-btn">Save</button>
+        <button id="cancel-note-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Link Modal -->
+  <div id="link-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Add Link</h3>
+      <input type="text" id="link-title" placeholder="Title" />
+      <input type="url" id="link-url" placeholder="URL" />
+      <div class="modal-actions">
+        <button id="save-link-btn">Save</button>
+        <button id="cancel-link-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Image Modal -->
+  <div id="image-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Add Image</h3>
+      <input type="text" id="image-title" placeholder="Title" />
+      <input type="file" id="image-file" accept="image/*" />
+      <p style="font-size: 12px; color: #666; margin-top: 5px;">Max size: 50MB</p>
+      <div class="modal-actions">
+        <button id="save-image-btn">Save</button>
+        <button id="cancel-image-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add PDF Modal -->
+  <div id="pdf-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Add PDF</h3>
+      <input type="text" id="pdf-title" placeholder="Title" />
+      <input type="file" id="pdf-file" accept="application/pdf" />
+      <p style="font-size: 12px; color: #666; margin-top: 5px;">Max size: 100MB</p>
+      <div class="modal-actions">
+        <button id="save-pdf-btn">Save</button>
+        <button id="cancel-pdf-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Settings</h3>
+      <label>
+        <input type="checkbox" id="calculator-mode-toggle" />
+        Enable Calculator Disguise Mode
+      </label>
+      <input type="text" id="calculator-pin" placeholder="Secret PIN (e.g., 2580)" />
+      <label>
+        Auto Lock Timer (seconds):
+        <input type="number" id="auto-lock-timer" value="60" min="10" />
+      </label>
+      <div class="modal-actions">
+        <button id="change-password-btn" style="background: #F59E0B;">Change Password</button>
+      </div>
+      <div class="modal-actions">
+        <button id="export-vault-btn" style="background: #3B82F6;">Export Backup</button>
+        <button id="import-vault-btn" style="background: #10B981;">Import Backup</button>
+      </div>
+      <input type="file" id="import-file" accept=".json" style="display: none;" />
+      <div class="modal-actions">
+        <button id="save-settings-btn">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Change Password Modal -->
+  <div id="change-password-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Change Master Password</h3>
+      <input type="password" id="current-password" placeholder="Current password" />
+      <input type="password" id="new-password-change" placeholder="New password" />
+      <input type="password" id="confirm-new-password" placeholder="Confirm new password" />
+      <p class="error" id="change-password-error"></p>
+      <div class="modal-actions">
+        <button id="save-new-password-btn">Change Password</button>
+        <button id="cancel-change-password-btn" style="background: #64748B;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="vault/encrypt.js"></script>
+  <script src="vault/indexeddb.js"></script>
+  <script src="vault/storage-new.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
