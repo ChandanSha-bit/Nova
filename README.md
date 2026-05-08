@@ -1,98 +1,104 @@
-# <p align="center">Nova — Next-Gen Privacy Vault</p>
+# <p align="center">Nova — Your Simple & Secure Private Vault</p>
 
 <p align="center">
-  <img src="assets/nova_logo_final.png" alt="Nova Logo" width="120">
+  <img src="assets/nova_logo_final.png" alt="Nova Logo" width="100">
 </p>
 
 <p align="center">
-  <strong>Secure, encrypted, and stealthy storage for your digital sanctuary.</strong>
+  <strong>The safest way to hide your secret notes, links, photos, and files right in your browser.</strong>
 </p>
 
 ---
 
-## 🛡️ Overview
+## 🌟 What is Nova?
 
-**Nova** is a high-performance Chrome extension designed for users who prioritize absolute privacy. Built on a foundation of military-grade encryption and a sophisticated "Calculator Disguise" mechanism, Nova provides a secure environment to store sensitive notes, bookmarks, images, and documents directly within your browser.
-
-## 🚀 Key Pillars
-
-### 1. Absolute Security
-Nova utilizes the **Web Crypto API** to implement **AES-GCM 256-bit encryption**. Every byte of your data is encrypted locally using a key derived via **PBKDF2**, ensuring that your information never leaves your machine in an unencrypted state.
-
-### 2. Stealth & Disguise
-Engineered for discretion, Nova can operate as a fully functional **Scientific Calculator**. Only your unique Secret PIN unlocks the transition to the vault, featuring high-end animations and zero traces of its true purpose to the casual observer.
-
-### 3. Professional UX
-A minimalist, cobalt-themed interface designed for efficiency. Nova features a compact **320x500px** footprint, staggered micro-animations, and an optimized **2x2 Grid Gallery** for visual assets.
+**Nova** is a "digital safe" for your browser. It helps you keep private information away from prying eyes. The best part? It can hide itself as a **fully working calculator**, so nobody even knows your vault exists!
 
 ---
 
-## ✨ Core Features
+## ✨ Main Features
 
-### 🔐 Cryptographic Vault
-- **Hardware-Accelerated Encryption**: Leverages modern CPU instructions for seamless encryption/decryption.
-- **Local-Only Storage**: 100% offline architecture; Nova does not utilize external servers, eliminating cloud-based vulnerabilities.
-- **Automatic Session Management**: Configurable auto-lock timers to protect your data during inactivity.
+### 🔒 1. Super Strong Security
+Everything you put in Nova is locked with a "Master Password." Nova uses advanced encryption (like a high-tech digital lock) to make sure only *you* can see your data.
 
-### 🧮 Disguise Engine
-- **Scientific Calculator Overlay**: Fully functional mathematical logic to maintain the "Nova Series-X" facade.
-- **Stealth Trigger**: Access your vault by entering your PIN and pressing the equals (`=`) operator.
-- **Visual Feedback**: Subtle "Nova pulse" animations during successful authentication.
+### 🧮 2. The Calculator Trick (Disguise)
+You can set Nova to look exactly like a normal calculator. 
+- To others: It's just for math.
+- To you: Type your secret code (PIN) and press `=`, and your hidden vault opens up!
 
-### 💾 Versatile Storage (IndexedDB)
-- **Document Management**: Encrypted PDF viewing and secure downloads (up to 100MB per file).
-- **Gallery Grid**: Compact 2x2 layout for private images with instant decryption on-view.
-- **Rich Notes & Bookmarks**: Categorized storage for sensitive text data and private URLs.
-- **Capacity Monitoring**: Real-time storage telemetry with a 500MB dedicated quota.
+### 📂 3. Store Anything
+- **Secret Notes**: Keep private thoughts, passwords, or codes.
+- **Private Links**: Save bookmarks you don't want in your main browser history.
+- **Photos & Images**: A private gallery for your sensitive pictures.
+- **PDF Documents**: Store important files and read them safely inside the app.
 
----
-
-## 🛠️ Technical Specification
-
-| Component | Technology |
-| :--- | :--- |
-| **Encryption Standard** | AES-GCM (Advanced Encryption Standard) |
-| **Key Derivation** | PBKDF2 with SHA-256 |
-| **Database** | IndexedDB (NovaDB) |
-| **UI Framework** | Vanilla JavaScript / CSS3 (No dependencies) |
-| **Manifest Version** | Manifest V3 (MV3) |
+### 🎨 4. Beautiful & Easy to Use
+Nova is designed to be dark, clean, and very fast. It doesn't take up much space on your screen and feels like a premium app.
 
 ---
 
-## 📥 Installation
+## 📥 How to Install (Simple Steps)
 
-1.  **Clone/Download** this repository to your local machine.
-2.  Open **Chrome** and navigate to `chrome://extensions/`.
-3.  Enable **Developer Mode** (top-right toggle).
-4.  Click **Load unpacked** and select the root directory of this project.
-5.  Pin **Nova** to your toolbar for instant access.
+1.  **Download** the Nova folder to your computer.
+2.  Open **Google Chrome** and go to this address: `chrome://extensions/`
+3.  Turn on **"Developer mode"** (look for a switch in the top-right corner).
+4.  Click the button that says **"Load unpacked"**.
+5.  Select the **Nova folder** you downloaded.
+6.  That's it! Click the 🧩 icon in your browser to pin Nova for easy access.
 
 ---
 
-## 📖 Usage Guide
+## 📖 How to Use Nova
 
-### Initial Setup
-Upon first launch, you will be prompted to create a **Master Password**. This password is the foundation of your encryption key—choose a strong, unique phrase.
+### First Time Setup
+When you open Nova for the first time, it will ask you to create a **Master Password**. 
+*   **Important:** Choose a password you will remember. If you lose this, Nova cannot recover your data!
 
-### Disguise Configuration
-1.  Navigate to **Settings** (⚙️ icon).
-2.  Toggle **Disguise Mode** to "On".
-3.  Set your **Secret PIN** (e.g., `2580`).
-4.  Apply changes. Nova will now launch as a calculator.
+### Using the Calculator Mode
+1.  Open Nova and go to **Settings** (the gear ⚙️ icon).
+2.  Turn on **"Disguise Mode"**.
+3.  Set a **Secret PIN** (like `1234`).
+4.  Now, every time you open the app, it will be a calculator. Just type your PIN and press `=` to enter your vault.
 
-### Managing Assets
-- Use the **Nav Tabs** to switch between Notes, Links, Images, and Docs.
-- Click the **Floating Action Button (+)** to add new encrypted items.
-- Use the **Action Icons** (👁️ View, 💾 Save, 🗑️ Delete) to manage individual assets.
+### Adding & Viewing Items
+- Use the icons at the top to switch between Notes, Links, Images, and Docs.
+- Click the **(+) button** to add something new.
+- Click **View** to see an item, or the **Trash bin** 🗑️ icon to delete it.
+
+---
+
+## 💾 Backup & Restore (Very Important)
+
+Because Nova keeps your data **only on your computer**, you should make backups to keep your information safe forever.
+
+### How to Backup (Export)
+1.  Open Nova and click the **Settings** (⚙️) icon.
+2.  Click the **Export** button.
+3.  Nova will save a file (like `nova-backup.json`) to your computer. 
+4.  **Keep this file safe!** You can put it on a USB drive or in a private cloud folder.
+
+### How to Recover (Import)
+1.  If you get a new computer or re-install the extension, open Nova.
+2.  Go to **Settings** and click **Import**.
+3.  Select the backup file you saved earlier.
+4.  Nova will ask for your **Master Password** to unlock the file.
+5.  All your secret notes and files will be back!
+
+---
+
+## ⚠️ Important Things to Know (Safety Tips)
+
+- **Where is my data?** Your data is stored **only on your computer**. It is NOT sent to the internet. This makes it very safe, but it also means...
+- **Don't lose your password!** Because we don't have your data on our servers, we cannot reset your password if you forget it.
+- **Back it up!** In the Settings, use the **Export** button to save a "backup file" once in a while. If you ever delete Chrome or get a new PC, you can use this file to get your data back.
 
 ---
 
 ## 📄 License
-
-Nova is released under the **MIT License**. Your privacy is your own; Nova simply provides the tools to protect it.
+Nova is free to use under the MIT License. Your privacy is our priority!
 
 ---
 
 <p align="center">
-  Developed with focus on privacy and performance. 🛡️
+  Stay safe and keep your secrets private with Nova. 🛡️
 </p>
