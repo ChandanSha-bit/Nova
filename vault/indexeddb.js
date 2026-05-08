@@ -1,8 +1,8 @@
-// IndexedDB management for Vaultify
+// IndexedDB management for Nova
 // Stores encrypted binary files with 500MB total cap
 
 const VaultDB = {
-  dbName: 'VaultifyDB',
+  dbName: 'NovaDB',
   version: 1,
   db: null,
   STORAGE_LIMIT: 500 * 1024 * 1024, // 500MB

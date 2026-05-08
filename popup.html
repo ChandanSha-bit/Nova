@@ -3,25 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vaultify</title>
+  <title>Nova Professional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
   <!-- Splash Screen -->
   <div id="splash-screen" class="screen">
     <div class="splash-content">
-      <h1>🔐 Vaultify</h1>
-      <p>Your Secure Vault</p>
+      <img src="assets/nova_logo_final.png" alt="Nova Logo" class="logo-img">
+      <h1 class="logo-text">Nova</h1>
+      <p class="tagline">Next-Gen Privacy Vault</p>
+      <div class="loader-dots">
+        <span></span><span></span><span></span>
+      </div>
     </div>
   </div>
 
   <!-- Create Password Screen -->
   <div id="create-password-screen" class="screen hidden">
     <div class="container">
-      <h2>Create Master Password</h2>
-      <input type="password" id="new-password" placeholder="Enter master password" />
-      <input type="password" id="confirm-password" placeholder="Confirm password" />
-      <button id="create-btn">Create Vault</button>
+      <div class="screen-header">
+        <h2>Security Setup</h2>
+        <p>Initialize your encrypted vault</p>
+      </div>
+      <div class="input-group">
+        <label>Master Password</label>
+        <input type="password" id="new-password" placeholder="••••••••" />
+      </div>
+      <div class="input-group">
+        <label>Confirm Password</label>
+        <input type="password" id="confirm-password" placeholder="••••••••" />
+      </div>
+      <button id="create-btn" class="primary-btn">Initialize Vault</button>
       <p class="error" id="create-error"></p>
     </div>
   </div>
@@ -29,9 +45,15 @@
   <!-- Login Screen -->
   <div id="login-screen" class="screen hidden">
     <div class="container">
-      <h2>🔐 Unlock Vault</h2>
-      <input type="password" id="login-password" placeholder="Enter master password" />
-      <button id="login-btn">Unlock</button>
+      <div class="screen-header">
+        <div class="lock-icon" style="font-size: 32px; margin-bottom: 12px; color: var(--primary);">🛡️</div>
+        <h2>Vault Access</h2>
+        <p>Authentication required to decrypt</p>
+      </div>
+      <div class="input-group">
+        <input type="password" id="login-password" placeholder="Enter master password" autofocus />
+      </div>
+      <button id="login-btn" class="primary-btn">Unlock Vault</button>
       <p class="error" id="login-error"></p>
     </div>
   </div>
@@ -39,81 +61,137 @@
   <!-- Calculator Mode -->
   <div id="calculator-screen" class="screen hidden">
     <div class="calculator">
-      <input type="text" id="calc-display" readonly />
-      <div class="calc-buttons">
+      <div class="calc-top">
+        <div class="calc-brand">SERIES-X PROFESSIONAL</div>
+        <input type="text" id="calc-display" readonly placeholder="0" />
+      </div>
+      <div class="calc-grid">
+        <button class="calc-btn utility">C</button>
+        <button class="calc-btn utility">+/-</button>
+        <button class="calc-btn utility">%</button>
+        <button class="calc-btn operator">÷</button>
+        
         <button class="calc-btn">7</button>
         <button class="calc-btn">8</button>
         <button class="calc-btn">9</button>
-        <button class="calc-btn operator">/</button>
+        <button class="calc-btn operator">×</button>
+        
         <button class="calc-btn">4</button>
         <button class="calc-btn">5</button>
         <button class="calc-btn">6</button>
-        <button class="calc-btn operator">*</button>
+        <button class="calc-btn operator">−</button>
+        
         <button class="calc-btn">1</button>
         <button class="calc-btn">2</button>
         <button class="calc-btn">3</button>
-        <button class="calc-btn operator">-</button>
-        <button class="calc-btn">0</button>
-        <button class="calc-btn">.</button>
-        <button class="calc-btn operator">=</button>
         <button class="calc-btn operator">+</button>
-        <button class="calc-btn clear">C</button>
+        
+        <button class="calc-btn zero">0</button>
+        <button class="calc-btn">.</button>
+        <button class="calc-btn operator equals">=</button>
       </div>
     </div>
   </div>
 
   <!-- Dashboard -->
   <div id="dashboard-screen" class="screen hidden">
-    <div class="header">
-      <h2>Vaultify</h2>
-      <button id="settings-btn">⚙️</button>
-    </div>
-    
-    <div class="tabs">
-      <button class="tab active" data-tab="notes">📝 Notes</button>
-      <button class="tab" data-tab="links">🔗 Links</button>
-      <button class="tab" data-tab="images">🖼️ Images</button>
-      <button class="tab" data-tab="pdfs">📄 PDFs</button>
-    </div>
+    <div class="dashboard-container">
+      <header class="app-header">
+        <div class="header-left">
+          <img src="assets/nova_logo_final.png" class="header-logo" alt="logo">
+          <h1>Nova</h1>
+        </div>
+        <div class="header-right">
+          <button id="settings-btn" class="icon-btn" title="Settings" style="background: transparent; border: none; cursor: pointer; color: var(--text-muted);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </button>
+        </div>
+      </header>
+      
+      <nav class="tabs-nav">
+        <button class="tab active" data-tab="notes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          Notes
+        </button>
+        <button class="tab" data-tab="links">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+          Links
+        </button>
+        <button class="tab" data-tab="images">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          Images
+        </button>
+        <button class="tab" data-tab="pdfs">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          Docs
+        </button>
+      </nav>
 
-    <div id="notes-tab" class="tab-content">
-      <button class="add-btn" id="add-note-btn">+ Add Note</button>
-      <div id="notes-list"></div>
-    </div>
+      <main class="dashboard-content">
+        <div id="notes-tab" class="tab-content">
+          <div class="tab-header">
+            <h3>Secret Notes</h3>
+            <button class="fab-btn" id="add-note-btn">+</button>
+          </div>
+          <div id="notes-list" class="items-grid"></div>
+        </div>
 
-    <div id="links-tab" class="tab-content hidden">
-      <button class="add-btn" id="add-link-btn">+ Add Link</button>
-      <div id="links-list"></div>
-    </div>
+        <div id="links-tab" class="tab-content hidden">
+          <div class="tab-header">
+            <h3>Secure Links</h3>
+            <button class="fab-btn" id="add-link-btn">+</button>
+          </div>
+          <div id="links-list" class="items-grid"></div>
+        </div>
 
-    <div id="images-tab" class="tab-content hidden">
-      <button class="add-btn" id="add-image-btn">+ Add Image</button>
-      <div id="images-list"></div>
-    </div>
+        <div id="images-tab" class="tab-content hidden">
+          <div class="tab-header">
+            <h3>Gallery</h3>
+            <button class="fab-btn" id="add-image-btn">+</button>
+          </div>
+          <div id="images-list" class="items-grid"></div>
+        </div>
 
-    <div id="pdfs-tab" class="tab-content hidden">
-      <button class="add-btn" id="add-pdf-btn">+ Add PDF</button>
-      <div id="pdfs-list"></div>
-    </div>
+        <div id="pdfs-tab" class="tab-content hidden">
+          <div class="tab-header">
+            <h3>Documents</h3>
+            <button class="fab-btn" id="add-pdf-btn">+</button>
+          </div>
+          <div id="pdfs-list" class="items-grid"></div>
+        </div>
+      </main>
 
-    <!-- Storage Info -->
-    <div class="storage-info">
-      <div id="storage-bar-container">
-        <div id="storage-bar"></div>
-      </div>
-      <p id="storage-text">Loading...</p>
+      <footer class="dashboard-footer">
+        <div class="storage-stats">
+          <div class="storage-info-labels">
+            <span id="storage-text">Vault Storage</span>
+            <span id="storage-percent">0%</span>
+          </div>
+          <div class="progress-container">
+            <div id="storage-bar" class="progress-bar"></div>
+          </div>
+        </div>
+      </footer>
     </div>
   </div>
 
   <!-- Add Note Modal -->
   <div id="note-modal" class="modal hidden">
     <div class="modal-content">
-      <h3>Add Note</h3>
-      <input type="text" id="note-title" placeholder="Title" />
-      <textarea id="note-content" placeholder="Content"></textarea>
-      <div class="modal-actions">
-        <button id="save-note-btn">Save</button>
-        <button id="cancel-note-btn">Cancel</button>
+      <div class="screen-header" style="margin-bottom: 15px; text-align: left;">
+        <h3 style="font-size: 16px;">New Secret Note</h3>
+      </div>
+      <div class="input-group">
+        <label>Title</label>
+        <input type="text" id="note-title" placeholder="Note heading" />
+      </div>
+      <div class="input-group">
+        <label>Content</label>
+        <textarea id="note-content" placeholder="Type your secret content here..." style="min-height: 120px;"></textarea>
+      </div>
+      <div class="action-row" style="display: flex; gap: 8px;">
+        <button id="save-note-btn" class="primary-btn">Save Note</button>
+        <button id="cancel-note-btn" class="secondary-btn">Cancel</button>
       </div>
     </div>
   </div>
@@ -121,12 +199,20 @@
   <!-- Add Link Modal -->
   <div id="link-modal" class="modal hidden">
     <div class="modal-content">
-      <h3>Add Link</h3>
-      <input type="text" id="link-title" placeholder="Title" />
-      <input type="url" id="link-url" placeholder="URL" />
-      <div class="modal-actions">
-        <button id="save-link-btn">Save</button>
-        <button id="cancel-link-btn">Cancel</button>
+      <div class="screen-header" style="margin-bottom: 15px; text-align: left;">
+        <h3 style="font-size: 16px;">Secure Bookmark</h3>
+      </div>
+      <div class="input-group">
+        <label>Title</label>
+        <input type="text" id="link-title" placeholder="Link title" />
+      </div>
+      <div class="input-group">
+        <label>URL</label>
+        <input type="url" id="link-url" placeholder="https://..." />
+      </div>
+      <div class="action-row" style="display: flex; gap: 8px;">
+        <button id="save-link-btn" class="primary-btn">Save Link</button>
+        <button id="cancel-link-btn" class="secondary-btn">Cancel</button>
       </div>
     </div>
   </div>
@@ -134,13 +220,20 @@
   <!-- Add Image Modal -->
   <div id="image-modal" class="modal hidden">
     <div class="modal-content">
-      <h3>Add Image</h3>
-      <input type="text" id="image-title" placeholder="Title" />
-      <input type="file" id="image-file" accept="image/*" />
-      <p style="font-size: 12px; color: #666; margin-top: 5px;">Max size: 50MB</p>
-      <div class="modal-actions">
-        <button id="save-image-btn">Save</button>
-        <button id="cancel-image-btn">Cancel</button>
+      <div class="screen-header" style="margin-bottom: 15px; text-align: left;">
+        <h3 style="font-size: 16px;">Secure Image</h3>
+      </div>
+      <div class="input-group">
+        <label>Title</label>
+        <input type="text" id="image-title" placeholder="Image title" />
+      </div>
+      <div class="input-group">
+        <label>File Selection</label>
+        <input type="file" id="image-file" accept="image/*" />
+      </div>
+      <div class="action-row" style="display: flex; gap: 8px;">
+        <button id="save-image-btn" class="primary-btn">Encrypt & Save</button>
+        <button id="cancel-image-btn" class="secondary-btn">Cancel</button>
       </div>
     </div>
   </div>
@@ -148,13 +241,20 @@
   <!-- Add PDF Modal -->
   <div id="pdf-modal" class="modal hidden">
     <div class="modal-content">
-      <h3>Add PDF</h3>
-      <input type="text" id="pdf-title" placeholder="Title" />
-      <input type="file" id="pdf-file" accept="application/pdf" />
-      <p style="font-size: 12px; color: #666; margin-top: 5px;">Max size: 100MB</p>
-      <div class="modal-actions">
-        <button id="save-pdf-btn">Save</button>
-        <button id="cancel-pdf-btn">Cancel</button>
+      <div class="screen-header" style="margin-bottom: 15px; text-align: left;">
+        <h3 style="font-size: 16px;">Secure Document</h3>
+      </div>
+      <div class="input-group">
+        <label>Title</label>
+        <input type="text" id="pdf-title" placeholder="Document title" />
+      </div>
+      <div class="input-group">
+        <label>File Selection</label>
+        <input type="file" id="pdf-file" accept="application/pdf" />
+      </div>
+      <div class="action-row" style="display: flex; gap: 8px;">
+        <button id="save-pdf-btn" class="primary-btn">Encrypt & Save</button>
+        <button id="cancel-pdf-btn" class="secondary-btn">Cancel</button>
       </div>
     </div>
   </div>
@@ -162,26 +262,52 @@
   <!-- Settings Modal -->
   <div id="settings-modal" class="modal hidden">
     <div class="modal-content">
-      <h3>Settings</h3>
-      <label>
-        <input type="checkbox" id="calculator-mode-toggle" />
-        Enable Calculator Disguise Mode
-      </label>
-      <input type="text" id="calculator-pin" placeholder="Secret PIN (e.g., 2580)" />
-      <label>
-        Auto Lock Timer (seconds):
-        <input type="number" id="auto-lock-timer" value="60" min="10" />
-      </label>
-      <div class="modal-actions">
-        <button id="change-password-btn" style="background: #F59E0B;">Change Password</button>
+      <div class="screen-header" style="margin-bottom: 15px; text-align: left;">
+        <h3 style="font-size: 16px;">Preferences</h3>
       </div>
-      <div class="modal-actions">
-        <button id="export-vault-btn" style="background: #3B82F6;">Export Backup</button>
-        <button id="import-vault-btn" style="background: #10B981;">Import Backup</button>
+      
+      <div class="settings-list">
+        <div class="settings-item">
+          <div class="settings-info">
+            <label>Disguise Mode</label>
+            <p>Functional calculator overlay.</p>
+          </div>
+          <div class="settings-control">
+            <input type="checkbox" id="calculator-mode-toggle" style="width: 18px; height: 18px; accent-color: var(--primary);" />
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="settings-info">
+            <label>Unlock PIN</label>
+            <p>Calculator mode trigger.</p>
+          </div>
+          <div class="settings-control">
+            <input type="text" id="calculator-pin" style="width: 60px; padding: 5px; margin: 0; background: #000; border: 1px solid var(--border); border-radius: 4px; color: #fff; text-align: center; font-size: 12px;" placeholder="PIN" />
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="settings-info">
+            <label>Security Lock</label>
+            <p>Auto-lock timeout (sec).</p>
+          </div>
+          <div class="settings-control">
+            <input type="number" id="auto-lock-timer" style="width: 60px; padding: 5px; margin: 0; background: #000; border: 1px solid var(--border); border-radius: 4px; color: #fff; text-align: center; font-size: 12px;" min="10" />
+          </div>
+        </div>
       </div>
-      <input type="file" id="import-file" accept=".json" style="display: none;" />
-      <div class="modal-actions">
-        <button id="save-settings-btn">Save Settings</button>
+
+      <div class="settings-actions-group">
+        <button id="change-password-btn" class="secondary-btn" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.2);">
+          Change Master Password
+        </button>
+        <div class="action-row">
+          <button id="export-vault-btn" class="secondary-btn">Export</button>
+          <button id="import-vault-btn" class="secondary-btn">Import</button>
+        </div>
+        <input type="file" id="import-file" accept=".json" style="display: none;" />
+        <button id="save-settings-btn" class="primary-btn" style="margin-top: 8px;">Apply Changes</button>
       </div>
     </div>
   </div>
@@ -189,14 +315,22 @@
   <!-- Change Password Modal -->
   <div id="change-password-modal" class="modal hidden">
     <div class="modal-content">
-      <h3>Change Master Password</h3>
-      <input type="password" id="current-password" placeholder="Current password" />
-      <input type="password" id="new-password-change" placeholder="New password" />
-      <input type="password" id="confirm-new-password" placeholder="Confirm new password" />
+      <div class="screen-header" style="margin-bottom: 15px; text-align: left;">
+        <h3 style="font-size: 16px;">Update Password</h3>
+      </div>
+      <div class="input-group">
+        <input type="password" id="current-password" placeholder="Current password" />
+      </div>
+      <div class="input-group">
+        <input type="password" id="new-password-change" placeholder="New password" />
+      </div>
+      <div class="input-group">
+        <input type="password" id="confirm-new-password" placeholder="Confirm new password" />
+      </div>
       <p class="error" id="change-password-error"></p>
-      <div class="modal-actions">
-        <button id="save-new-password-btn">Change Password</button>
-        <button id="cancel-change-password-btn" style="background: #64748B;">Cancel</button>
+      <div class="action-row" style="display: flex; gap: 8px;">
+        <button id="save-new-password-btn" class="primary-btn">Update</button>
+        <button id="cancel-change-password-btn" class="secondary-btn">Cancel</button>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Vaultify",
+  "name": "Nova",
   "version": "1.0.0",
   "description": "Secure vault for notes, links, images, and PDFs with calculator disguise mode",
   "permissions": [
@@ -8,7 +8,7 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Vaultify - Secure Vault"
+    "default_title": "Nova - Secure Vault"
   },
   "background": {
     "service_worker": "background.js"

@@ -1,108 +1,98 @@
-# Vaultify - Secure Chrome Extension Vault
+# <p align="center">Nova — Next-Gen Privacy Vault</p>
 
-A secure Chrome extension that provides encrypted storage for notes, links, images, and PDFs with an optional calculator disguise mode.
+<p align="center">
+  <img src="assets/nova_logo_final.png" alt="Nova Logo" width="120">
+</p>
 
-## Features
+<p align="center">
+  <strong>Secure, encrypted, and stealthy storage for your digital sanctuary.</strong>
+</p>
 
-### 🔐 Security
-- **AES-GCM Encryption**: All data encrypted using Web Crypto API
-- **PBKDF2 Key Derivation**: Secure password-based key generation
-- **Master Password Protection**: Single password protects all data
-- **Auto-lock Timer**: Configurable automatic locking
-- **Change Password**: Re-encrypt all data with new password
+---
 
-### 📱 Calculator Disguise Mode
-- **Stealth Interface**: Looks like a regular calculator
-- **Secret PIN Access**: Enter PIN to access vault (purple flash animation)
-- **Real Calculator Logic**: Fully functional calculator with proper math operations
-- **Expression Display**: Shows "500+200" while typing, "700" on equals
+## 🛡️ Overview
 
-### 💾 Storage
-- **IndexedDB Backend**: 500MB storage capacity
-- **Binary File Support**: Encrypted storage for images and PDFs
-- **Storage Monitoring**: Real-time usage indicator
-- **Backup/Restore**: Export/import encrypted vault data
+**Nova** is a high-performance Chrome extension designed for users who prioritize absolute privacy. Built on a foundation of military-grade encryption and a sophisticated "Calculator Disguise" mechanism, Nova provides a secure environment to store sensitive notes, bookmarks, images, and documents directly within your browser.
 
-### 📝 Content Types
-- **Notes**: Rich text notes with view/edit functionality
-- **Links**: URL storage with open/copy/edit options
-- **Images**: Image storage with view/download (max 50MB per file)
-- **PDFs**: PDF storage with browser viewing/download (max 100MB per file)
+## 🚀 Key Pillars
 
-### 🎨 Premium Dark Theme
-- **Modern Design**: Dark theme with purple accents (#0F172A, #7C3AED)
-- **Compact Size**: 360x520px optimized for Chrome extensions
-- **Smooth Animations**: Hover effects and transitions
-- **Professional UI**: Glassmorphism and gradient effects
+### 1. Absolute Security
+Nova utilizes the **Web Crypto API** to implement **AES-GCM 256-bit encryption**. Every byte of your data is encrypted locally using a key derived via **PBKDF2**, ensuring that your information never leaves your machine in an unencrypted state.
 
-## Installation
+### 2. Stealth & Disguise
+Engineered for discretion, Nova can operate as a fully functional **Scientific Calculator**. Only your unique Secret PIN unlocks the transition to the vault, featuring high-end animations and zero traces of its true purpose to the casual observer.
 
-1. Load the extension in Chrome Developer Mode
-2. Create a master password (minimum 6 characters)
-3. Start adding your secure content
+### 3. Professional UX
+A minimalist, cobalt-themed interface designed for efficiency. Nova features a compact **320x500px** footprint, staggered micro-animations, and an optimized **2x2 Grid Gallery** for visual assets.
 
-## Usage
+---
 
-### Normal Mode
-1. Enter master password to unlock
-2. Use tabs to navigate between content types
-3. Click "+" buttons to add new items
-4. Use action buttons (View, Edit, Delete) on each item
+## ✨ Core Features
 
-### Calculator Mode
-1. Enable in Settings → Calculator Disguise Mode
-2. Set a secret PIN (default: 2580)
-3. Extension opens as calculator
-4. Enter PIN and press "=" to access vault (purple flash)
+### 🔐 Cryptographic Vault
+- **Hardware-Accelerated Encryption**: Leverages modern CPU instructions for seamless encryption/decryption.
+- **Local-Only Storage**: 100% offline architecture; Nova does not utilize external servers, eliminating cloud-based vulnerabilities.
+- **Automatic Session Management**: Configurable auto-lock timers to protect your data during inactivity.
 
-### Settings
-- **Calculator Mode**: Toggle disguise mode on/off
-- **Secret PIN**: Set custom PIN for vault access
-- **Auto Lock**: Configure automatic lock timer
-- **Change Password**: Update master password (re-encrypts all data)
-- **Backup/Restore**: Export/import vault data
+### 🧮 Disguise Engine
+- **Scientific Calculator Overlay**: Fully functional mathematical logic to maintain the "Nova Series-X" facade.
+- **Stealth Trigger**: Access your vault by entering your PIN and pressing the equals (`=`) operator.
+- **Visual Feedback**: Subtle "Nova pulse" animations during successful authentication.
 
-## Security Notes
+### 💾 Versatile Storage (IndexedDB)
+- **Document Management**: Encrypted PDF viewing and secure downloads (up to 100MB per file).
+- **Gallery Grid**: Compact 2x2 layout for private images with instant decryption on-view.
+- **Rich Notes & Bookmarks**: Categorized storage for sensitive text data and private URLs.
+- **Capacity Monitoring**: Real-time storage telemetry with a 500MB dedicated quota.
 
-- All data is encrypted locally using AES-GCM
-- Master password is hashed with SHA-256
-- No data is sent to external servers
-- IndexedDB may be cleared if browser data is cleared
-- Regular backups recommended
+---
 
-## File Limits
+## 🛠️ Technical Specification
 
-- **Images**: 50MB per file
-- **PDFs**: 100MB per file
-- **Total Storage**: 500MB across all content
-- **Notes/Links**: No specific size limits
+| Component | Technology |
+| :--- | :--- |
+| **Encryption Standard** | AES-GCM (Advanced Encryption Standard) |
+| **Key Derivation** | PBKDF2 with SHA-256 |
+| **Database** | IndexedDB (NovaDB) |
+| **UI Framework** | Vanilla JavaScript / CSS3 (No dependencies) |
+| **Manifest Version** | Manifest V3 (MV3) |
 
-## Technical Details
+---
 
-- **Encryption**: AES-GCM with PBKDF2 key derivation
-- **Storage**: IndexedDB for binary file support
-- **Framework**: Vanilla JavaScript (no dependencies)
-- **Manifest**: Version 3 Chrome Extension
+## 📥 Installation
 
-## File Structure
+1.  **Clone/Download** this repository to your local machine.
+2.  Open **Chrome** and navigate to `chrome://extensions/`.
+3.  Enable **Developer Mode** (top-right toggle).
+4.  Click **Load unpacked** and select the root directory of this project.
+5.  Pin **Nova** to your toolbar for instant access.
 
-```
-vaultify/
-├── manifest.json          # Extension configuration
-├── background.js          # Service worker
-├── popup.html             # Main popup interface
-├── popup.css              # Premium dark theme styles
-├── popup.js               # Main functionality
-└── vault/
-    ├── encrypt.js         # Encryption utilities
-    ├── indexeddb.js       # Database management
-    └── storage-new.js     # Storage API
-```
+---
 
-## Version History
+## 📖 Usage Guide
 
-- **v1.0.0**: Initial release with full feature set
+### Initial Setup
+Upon first launch, you will be prompted to create a **Master Password**. This password is the foundation of your encryption key—choose a strong, unique phrase.
 
-## License
+### Disguise Configuration
+1.  Navigate to **Settings** (⚙️ icon).
+2.  Toggle **Disguise Mode** to "On".
+3.  Set your **Secret PIN** (e.g., `2580`).
+4.  Apply changes. Nova will now launch as a calculator.
 
-MIT License
+### Managing Assets
+- Use the **Nav Tabs** to switch between Notes, Links, Images, and Docs.
+- Click the **Floating Action Button (+)** to add new encrypted items.
+- Use the **Action Icons** (👁️ View, 💾 Save, 🗑️ Delete) to manage individual assets.
+
+---
+
+## 📄 License
+
+Nova is released under the **MIT License**. Your privacy is your own; Nova simply provides the tools to protect it.
+
+---
+
+<p align="center">
+  Developed with focus on privacy and performance. 🛡️
+</p>

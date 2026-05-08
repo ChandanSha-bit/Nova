@@ -79,7 +79,7 @@ let showingResult = false;
 
 function initCalculator() {
   const display = document.getElementById('calc-display');
-  display.value = '0';
+  display.value = '';
   
   document.querySelectorAll('.calc-btn').forEach(btn => {
     btn.addEventListener('click', async (e) => {
@@ -89,26 +89,29 @@ function initCalculator() {
         calcExpression = '';
         calcResult = null;
         showingResult = false;
-        display.value = '0';
+        display.value = '';
       } else if (value === '=') {
         // Check for secret PIN first
         const settings = await VaultStorage.getSettings();
         if (calcExpression === settings.calculatorPin) {
-          // Purple flash animation
-          document.body.style.background = '#7C3AED';
+          // Success animation
+          document.body.style.transition = 'background 0.5s';
+          document.body.style.background = 'var(--primary)';
           setTimeout(() => {
-            document.body.style.background = '#0F172A';
+            document.body.style.background = '';
             showScreen('login-screen');
-          }, 200);
+          }, 300);
           calcExpression = '';
-          display.value = '0';
+          display.value = '';
           return;
         }
         
         // Calculate result
         try {
           if (calcExpression) {
-            calcResult = eval(calcExpression);
+            // Replace visual operators with JS operators
+            let jsExpr = calcExpression.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
+            calcResult = eval(jsExpr);
             display.value = calcResult;
             showingResult = true;
           }
@@ -117,16 +120,28 @@ function initCalculator() {
           calcExpression = '';
           showingResult = false;
         }
-      } else if (['+', '-', '*', '/'].includes(value)) {
+      } else if (['+', '−', '×', '÷'].includes(value)) {
         if (showingResult && calcResult !== null) {
           calcExpression = calcResult + value;
           showingResult = false;
-        } else if (calcExpression && !isNaN(calcExpression.slice(-1))) {
+        } else if (calcExpression && !['+', '−', '×', '÷'].includes(calcExpression.slice(-1))) {
           calcExpression += value;
-        } else if (calcExpression === '') {
-          return; // Don't start with operator
+        } else if (calcExpression === '' && value === '−') {
+           calcExpression = '−';
         }
         display.value = calcExpression;
+      } else if (value === '+/-') {
+          if (calcExpression.startsWith('−')) calcExpression = calcExpression.substring(1);
+          else calcExpression = '−' + calcExpression;
+          display.value = calcExpression;
+      } else if (value === '%') {
+          try {
+              let jsExpr = calcExpression.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
+              calcResult = eval(jsExpr) / 100;
+              display.value = calcResult;
+              calcExpression = calcResult.toString();
+              showingResult = true;
+          } catch(e) { display.value = 'Error'; }
       } else {
         // Number or decimal point
         if (showingResult) {
@@ -172,6 +187,16 @@ async function loadNotes() {
   
   const notes = await VaultStorage.getAllNotes();
   
+  if (notes.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">📂</div>
+        <p class="empty-text">No encrypted notes found.<br>Use the + button to create one.</p>
+      </div>
+    `;
+    return;
+  }
+  
   for (const note of notes) {
     const title = await VaultEncrypt.decrypt(note.title, currentPassword);
     const content = await VaultEncrypt.decrypt(note.content, currentPassword);
@@ -180,7 +205,7 @@ async function loadNotes() {
     div.className = 'item';
     div.innerHTML = `
       <h4>${title}</h4>
-      <p>${content.substring(0, 100)}${content.length > 100 ? '...' : ''}</p>
+      <p>${content.substring(0, 80)}${content.length > 80 ? '...' : ''}</p>
       <div class="item-actions">
         <button onclick="viewNote('${note.id}')">View</button>
         <button onclick="editNote('${note.id}')">Edit</button>
@@ -196,6 +221,16 @@ async function loadLinks() {
   container.innerHTML = '';
   
   const links = await VaultStorage.getAllLinks();
+  
+  if (links.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🔗</div>
+        <p class="empty-text">No secure links indexed.</p>
+      </div>
+    `;
+    return;
+  }
   
   for (const link of links) {
     const title = await VaultEncrypt.decrypt(link.title, currentPassword);
@@ -223,6 +258,16 @@ async function loadImages() {
   
   const images = await VaultStorage.getFilesByType('image');
   
+  if (images.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🖼️</div>
+        <p class="empty-text">Private gallery is empty.</p>
+      </div>
+    `;
+    return;
+  }
+  
   for (const image of images) {
     const title = await VaultEncrypt.decrypt(image.title, currentPassword);
     const data = await VaultEncrypt.decrypt(image.data, currentPassword);
@@ -231,11 +276,11 @@ async function loadImages() {
     div.className = 'item';
     div.innerHTML = `
       <h4>${title}</h4>
-      <img src="${data}" style="max-width: 100px; max-height: 100px; cursor: pointer;" onclick="viewImage('${data}', '${title}')" />
+      <img src="${data}" onclick="viewImage('${data}', '${title}')" />
       <div class="item-actions">
-        <button onclick="viewImage('${data}', '${title}')">View</button>
-        <button onclick="downloadFile('${data}', '${title}.png')">Download</button>
-        <button onclick="deleteFile('${image.id}')" class="delete-btn">Delete</button>
+        <button onclick="viewImage('${data}', '${title}')" title="View">View</button>
+        <button onclick="downloadFile('${data}', '${title}.png')" title="Download">Save</button>
+        <button onclick="deleteFile('${image.id}')" class="delete-btn" title="Delete">Del</button>
       </div>
     `;
     container.appendChild(div);
@@ -247,6 +292,16 @@ async function loadPDFs() {
   container.innerHTML = '';
   
   const pdfs = await VaultStorage.getFilesByType('pdf');
+  
+  if (pdfs.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">📄</div>
+        <p class="empty-text">No secure documents stored.</p>
+      </div>
+    `;
+    return;
+  }
   
   for (const pdf of pdfs) {
     const title = await VaultEncrypt.decrypt(pdf.title, currentPassword);
@@ -270,22 +325,26 @@ async function loadPDFs() {
 // Helper functions
 function viewImage(data, title) {
   const modal = document.createElement('div');
-  modal.className = 'modal image-modal';
+  modal.className = 'modal image-viewer-modal';
   modal.innerHTML = `
-    <div class="modal-content">
-      <h3>${title}</h3>
-      <img src="${data}" style="max-width: 100%; max-height: 400px;" />
-      <button class="close-image-btn">Close</button>
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3>${title}</h3>
+      </div>
+      <div class="modal-body">
+        <img src="${data}" />
+      </div>
+      <div class="modal-actions">
+        <button class="primary-btn close-image-btn">Close</button>
+      </div>
     </div>
   `;
   
-  // Add event listeners
   const closeBtn = modal.querySelector('.close-image-btn');
   closeBtn.addEventListener('click', () => {
     document.body.removeChild(modal);
   });
   
-  // Close on background click
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
       document.body.removeChild(modal);
@@ -367,10 +426,14 @@ async function viewNote(id) {
   modal.className = 'modal';
   modal.innerHTML = `
     <div class="modal-content">
-      <h3>${title}</h3>
-      <div style="max-height: 300px; overflow-y: auto; padding: 10px; background: #0F172A; border-radius: 8px; white-space: pre-wrap;">${content}</div>
-      <div class="modal-actions">
-        <button onclick="this.parentElement.parentElement.parentElement.remove()">Close</button>
+      <div class="screen-header" style="margin-bottom: 12px; text-align: left;">
+        <h3 style="font-size: 16px;">${title}</h3>
+      </div>
+      <div class="modal-body note-view-content" style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); font-family: inherit;">
+        ${content}
+      </div>
+      <div class="modal-actions" style="margin-top: 15px;">
+        <button class="primary-btn" onclick="this.parentElement.parentElement.parentElement.remove()">Close</button>
       </div>
     </div>
   `;
@@ -768,9 +831,11 @@ async function updateStorageInfo() {
   const info = await VaultStorage.getStorageInfo();
   const bar = document.getElementById('storage-bar');
   const text = document.getElementById('storage-text');
+  const percentText = document.getElementById('storage-percent');
   
   bar.style.width = info.percentage + '%';
-  text.textContent = `${info.usedMB} MB / ${info.limitMB} MB used (${info.percentage}%)`;
+  text.textContent = `${info.usedMB} MB / ${info.limitMB} MB used`;
+  percentText.textContent = `${info.percentage}%`;
 }
 
 // Auto lock

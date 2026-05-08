@@ -1,7 +1,7 @@
-// Background service worker for Vaultify
+// Background service worker for Nova
 
 chrome.runtime.onInstalled.addListener(() => {
-  console.log('Vaultify installed successfully');
+  console.log('Nova installed successfully');
 });
 
 // Handle extension icon click

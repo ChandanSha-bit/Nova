@@ -135,7 +135,7 @@ const VaultStorage = {
     
     const a = document.createElement('a');
     a.href = url;
-    a.download = `vaultify-backup-${Date.now()}.json`;
+    a.download = `nova-backup-${Date.now()}.json`;
     a.click();
     
     URL.revokeObjectURL(url);
